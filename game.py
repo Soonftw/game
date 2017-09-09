@@ -1,4 +1,4 @@
-from tkinter import *
+import map
 
 class Character():
     def __init__(self,str,int,dex):
@@ -53,11 +53,16 @@ def pickStats(hero, points):
         choice = input()
         if choice.lower() == "str":
             hero.levelStats("str",1)
+            points -= 1
         elif choice.lower() == "int":
             hero.levelStats("int",1)
+            points -= 1
         elif choice.lower() == "dex":
             hero.levelStats("dex",1)
-        points -= 1
+            points -= 1
+        else:
+            print("You have to choose between 'Str', 'Dex, or 'Int'.")
+
     return hero
 
 
@@ -74,6 +79,26 @@ def decision(hero):
 
 
 def main():
+    # root = Tk()
+    #
+    # label1 = Label(root, text = "Name: ")
+    # label2 = Label(root, text = "Password: ")
+    # entry1 = Entry(root)
+    # entry2 = Entry(root)
+    #
+    # label1.grid(row=0, sticky=E)
+    # label2.grid(row=1)
+    #
+    # entry1.grid(row=0,column=1, sticky=W)
+    # entry2.grid(row=1,column=1, sticky=W)
+    #
+    # c = Checkbutton(root, text="Keep me logged in.")
+    # c.grid(columnspan=2)
+    #
+    # root.mainloop()
+
+    #-------------------------------
+
     # root = Tk()
     #
     # topFrame = Frame(root)
