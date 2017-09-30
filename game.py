@@ -1,4 +1,5 @@
-import map
+from map import *
+
 
 class Character():
     def __init__(self,str,int,dex):
@@ -130,30 +131,62 @@ def main():
     # root.mainloop()
 
     done = False
+
     alive = True
 
     print("Welcome to the game.")
 
-    while not done:
-        choice = input("Please choose a class ")
-        if choice.lower() == "warrior":
-            done = True
-            print("You have chosen the strong warrior.")
-            hero = Warrior(6,3,5)
-        elif choice.lower() == "mage":
-            done = True
-            print("You have chosen the wise mage.")
-            hero = Mage(3,6,5)
-        elif choice.lower() == "ranger":
-            done = True
-            print("You have chosen the quick ranger")
-            hero = Ranger(3,5,6)
-        else:
-            print("You have to choose one of the options.")
+    # while not done:
+    #     choice = input("Please choose a class ")
+    #     if choice.lower() == "warrior":
+    #         done = True
+    #         print("You have chosen the strong warrior.")
+    #         hero = Warrior(6,3,5)
+    #     elif choice.lower() == "mage":
+    #         done = True
+    #         print("You have chosen the wise mage.")
+    #         hero = Mage(3,6,5)
+    #     elif choice.lower() == "ranger":
+    #         done = True
+    #         print("You have chosen the quick ranger")
+    #         hero = Ranger(3,5,6)
+    #     else:
+    #         print("You have to choose one of the options.")
+    #
+    # hero = pickStats(hero, 5)
 
-    hero = pickStats(hero, 5)
+    global x
+    global y
 
     while alive:
-        hero = decision(hero)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                alive = False
+            print(event)
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    x -= 10
+                    print("Hello there")
+                if event.key == pygame.K_RIGHT:
+                    x += 10
+                    print("Hello there")
+                if event.key == pygame.K_UP:
+                    y -= 10
+                    print("Hello there")
+                if event.key == pygame.K_DOWN:
+                    y += 10
+                    print("Hello there")
+
+
+        gameDisplay.fill(white)
+        hero(x,y)
+        pygame.display.update()
+        clock.tick(30)
+
+    pygame.quit()
+
+
+        # hero = decision(hero)
 
 main()

@@ -1,13 +1,40 @@
-from tkinter import *
+# from tkinter import *
 import random
+import pygame
 
-root = Tk()
+
+pygame.init()
+
+display_width = 800
+display_height = 600
+black = (0,0,0)
+white = (255,255,255)
+red = (255,0,0)
+green = (0,255,0)
+blue = (0,0,255)
+
+x = (display_width * 0.2)
+y = (display_height * 0.2)
+
+gameDisplay = pygame.display.set_mode((display_width,display_height))
+pygame.display.set_caption("game")
+clock = pygame.time.Clock()
+gameDisplay.fill(white)
+
+
+
+# hero_img = pygame.image.load('C:\\Users\\Administratör\\Desktop\\game\\img\\guy.jpg')
+hello_there = pygame.image.load("hello_there.jpg")
+
+def hero(x,y):
+    gameDisplay.blit(hello_there,(x,y))
+
+
+
+# root = Tk()
 
 # def callback(event):
     # print ("clicked at", event.x, event.y)
-
-
-
 
 class Grid():
     def __init__(self,value, photo):
@@ -26,25 +53,25 @@ class Grid():
         # return str(self.east.monster)+str(self.west.monster)+str(self.north.monster)+str(self.south.monster)
         return str(self.value)
 
-background_url="img\\background_tile.gif"
-hero_url="img\\guy.gif"
+# background_url="img\\background_tile.gif"
+# hero_url="img\\guy.gif"
 
 def mapCreator():
     value = 1
     world = [[i for i in range(10)] for j in range(10)]
     worldmap = [[i for i in range(10)] for j in range(10)]
-    photo = PhotoImage(file=background_url)
+    # photo = PhotoImage(file=background_url)
     # print(world)
     for row in range(0,10):
         for column in range(0,10):
-            world[row][column] = Grid(value,photo)
+            world[row][column] = Grid(value,"photo")
             value +=1
 
     random_tile=random.randint(51,59)
     for i in range(0,10):
         for j in range(0,10):
             if world[i][j].value == random_tile:
-                world[i][j].image=PhotoImage(file=hero_url)
+                # world[i][j].image=PhotoImage(file=hero_url)
                 world[i][j].has_hero=True
 
     # print(world[0][0])
@@ -85,51 +112,51 @@ def mapCreator():
 
 world = mapCreator()
 
-def key(event):
-    print ("pressed", repr(event.char))
+# def key(event):
+    # print ("pressed", repr(event.char))
 
-def press_left(event,world):
-    for i in range(0,10):
-        for j in range(0,10):
-            if world[i][j].has_hero:
-                print(world[i][j])
-                world[i][j].has_hero=False
-                world[i][j].image=PhotoImage(file=background_url)
-                world[i][j-1].has_hero=True
-                world[i][j-1].image=PhotoImage(file=hero_url)
-            square = Label(root,borderwidth=0,highlightthickness=0,height=100,width=100,image=world[row][column].image,text=world[row][column], compound = CENTER)
-            # square.photo = photo
-            square.grid(row=row,column=column)
-            square.photo = world[row][column].image
-    root.update()
-
-
-    print ("pressed left")
-def press_right(event):
-    print ("pressed right")
-def press_up(event):
-    print ("pressed up")
-def press_down(event):
-    print ("pressed down")
-
-def callback(event):
-    square.focus_set()
-    print ("clicked at", event.x, event.y)
-
-for row in range(0,10):
-    for column in range(0,10):
-        square = Label(root,borderwidth=0,highlightthickness=0,height=100,width=100,image=world[row][column].image,text=world[row][column], compound = CENTER)
-        # square.photo = photo
-        square.grid(row=row,column=column)
-        square.photo = world[row][column].image
-        square.bind("<Key>",key)
-        square.bind("<Left>",lambda event: press_left(event,world))
-        square.bind("<Right>",press_right)
-        square.bind("<Up>",press_up)
-        square.bind("<Down>",press_down)
-        square.bind("<Button-1>", callback)
+# def press_left(event,world):
+#     for i in range(0,10):
+#         for j in range(0,10):
+#             if world[i][j].has_hero:
+#                 print(world[i][j])
+#                 world[i][j].has_hero=False
+#                 world[i][j].image=PhotoImage(file=background_url)
+#                 world[i][j-1].has_hero=True
+#                 world[i][j-1].image=PhotoImage(file=hero_url)
+#             square = Label(root,borderwidth=0,highlightthickness=0,height=100,width=100,image=world[row][column].image,text=world[row][column], compound = CENTER)
+#             # square.photo = photo
+#             square.grid(row=row,column=column)
+#             square.photo = world[row][column].image
+#     root.update()
 
 
-root.mainloop()
+#     print ("pressed left")
+# def press_right(event):
+#     print ("pressed right")
+# def press_up(event):
+#     print ("pressed up")
+# def press_down(event):
+#     print ("pressed down")
+#
+# def callback(event):
+#     square.focus_set()
+#     print ("clicked at", event.x, event.y)
+#
+# for row in range(0,10):
+#     for column in range(0,10):
+#         square = Label(root,borderwidth=0,highlightthickness=0,height=100,width=100,image=world[row][column].image,text=world[row][column], compound = CENTER)
+#         # square.photo = photo
+#         square.grid(row=row,column=column)
+#         square.photo = world[row][column].image
+#         square.bind("<Key>",key)
+#         square.bind("<Left>",lambda event: press_left(event,world))
+#         square.bind("<Right>",press_right)
+#         square.bind("<Up>",press_up)
+#         square.bind("<Down>",press_down)
+#         square.bind("<Button-1>", callback)
+#
+#
+# root.mainloop()
 # for i in range(len(world[0])):
 #     print(world[5][i].west)
